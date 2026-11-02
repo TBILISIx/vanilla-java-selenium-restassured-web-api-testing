@@ -1,0 +1,1 @@
+java "-Dwebdriver.chrome.driver=D:\java-solvd\selenium\chromedriver.exe" -jar "D:\java-solvd\selenium\selenium-server-4.44.0.jar" standalone --session-timeout 9999
