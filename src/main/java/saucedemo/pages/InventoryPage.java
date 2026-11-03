@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import saucedemo.base.BasePage;
+import basepage.BasePage;
 import saucedemo.components.ProductCard;
 import saucedemo.components.SideMenu;
 

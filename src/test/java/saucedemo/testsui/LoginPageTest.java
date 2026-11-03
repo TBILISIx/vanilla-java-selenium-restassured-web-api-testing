@@ -1,6 +1,7 @@
-package tests;
+package saucedemo.testsui;
 
-import base.BaseTest;
+import basetest.BaseTest;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,7 +15,7 @@ public class LoginPageTest extends BaseTest {
     public void testSuccessfulLogin() {
 
         // Create Login Page
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
         // Open SauceDemo
         loginPage.open();
@@ -47,7 +48,7 @@ public class LoginPageTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
 
         // Create Login Page
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
         // Open SauceDemo
         loginPage.open();
@@ -73,8 +74,10 @@ public class LoginPageTest extends BaseTest {
 
     public void testLogInLogOut() {
 
+        System.out.println(Thread.currentThread().getName() + " -> " + ((RemoteWebDriver) getDriver()).getSessionId());
+
         // Create Login Page
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
         // Open SauceDemo
         loginPage.open();
@@ -97,7 +100,7 @@ public class LoginPageTest extends BaseTest {
 
     @Test(description = "Failed login followed by successful login in the same session")
     public void testFailedThenSuccessfulLogin() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
 
         loginPage.loginWithInvalidCredentials("Greetings_Neo o_^ ", "WAKE_UP_NEO");

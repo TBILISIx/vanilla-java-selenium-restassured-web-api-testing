@@ -1,6 +1,6 @@
-package tests;
+package saucedemo.testsui;
 
-import base.BaseTest;
+import basetest.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import saucedemo.pages.InventoryPage;
@@ -10,7 +10,7 @@ public class CartTest extends BaseTest {
 
     @Test(description = "Add a product to the cart")
     public void testAddProductToCart() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
         InventoryPage inventoryPage = loginPage.loginWithValidCredentials("standard_user", "secret_sauce");
 

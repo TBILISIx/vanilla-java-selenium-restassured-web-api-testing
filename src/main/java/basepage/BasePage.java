@@ -1,4 +1,4 @@
-package saucedemo.base;
+package basepage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;

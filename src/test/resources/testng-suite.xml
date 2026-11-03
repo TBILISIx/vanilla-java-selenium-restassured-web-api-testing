@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="SauceDemo" parallel="methods" thread-count="3" data-provider-thread-count="3">
+
+    <test name="UI tests">
+        <packages>
+            <package name="saucedemo.testsui.*"/>
+        </packages>
+    </test>
+
+</suite>
