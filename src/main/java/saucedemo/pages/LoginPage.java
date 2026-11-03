@@ -1,7 +1,9 @@
-package pages;
+package saucedemo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import saucedemo.base.BasePage;
 
 public class LoginPage extends BasePage {
 
@@ -23,20 +25,35 @@ public class LoginPage extends BasePage {
     // Open site (SauceDemo)
     public void open() {
         driver.get(PAGE_URL);
+        waitUntilOpened();
     }
 
     // Hunters mark to know the page is open in this case login button - no login without login button
     @Override
-    public By marker() {
+    protected By marker() {
         return loginButton;
     }
 
-    public HomePage login(String username, String password) {
+    // Successful login path
+    public InventoryPage loginWithValidCredentials(String username, String password) {
+        submitLoginForm(username, password);
+
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.waitUntilOpened();
+        return inventoryPage;
+    }
+
+    // Unsuccessful login path
+    public LoginPage loginWithInvalidCredentials(String username, String password) {
+        submitLoginForm(username, password);
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(errorText));
+        return this;
+    }
+
+    private void submitLoginForm(String username, String password) {
         type(usernameField, username);
         type(passwordField, password);
         click(loginButton);
-
-        return new HomePage(driver);
     }
 
     // Gets error text after invalid login / password
