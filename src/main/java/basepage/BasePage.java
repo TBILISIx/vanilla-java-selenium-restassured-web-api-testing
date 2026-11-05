@@ -1,5 +1,6 @@
 package basepage;
 
+import config.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ import java.time.Duration;
 
 public abstract class BasePage {
 
-    private static final int DEFAULT_TIMEOUT_SECONDS = 10;
+    private static final int DEFAULT_TIMEOUT_SECONDS = Configuration.getRequiredInt("timeout.seconds");
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;

@@ -1,8 +1,11 @@
 package driver;
 
+import config.Configuration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 // Driver Manager that provides a separate WebDriver instance per thread,
 // allowing tests to execute in parallel using independent browser sessions.
@@ -15,9 +18,34 @@ public final class DriverManager {
     }
 
     public static void createDriver() {
-        WebDriver driver = new ChromeDriver(ChromeOptionsFactory.withoutAnnoyingPopups());
+        String browser = Configuration.getRequired("browser").toLowerCase();
+        boolean headless = Configuration.getRequiredBoolean("headless");
+
+        WebDriver driver = switch (browser) {
+            case "chrome" -> createChrome(headless);
+            case "firefox" -> createFirefox(headless);
+            default -> throw new IllegalArgumentException(
+                    "Unsupported browser: " + browser + ". Use chrome or firefox.");
+        };
+
         DRIVER.set(driver);
         driver.manage().window().maximize();
+    }
+
+    private static WebDriver createChrome(boolean headless) {
+        ChromeOptions options = ChromeOptionsFactory.withoutAnnoyingPopups();
+        if (headless) {
+            options.addArguments("--headless=new", "--window-size=1920,1080");
+        }
+        return new ChromeDriver(options);
+    }
+
+    private static WebDriver createFirefox(boolean headless) {
+        FirefoxOptions options = new FirefoxOptions();
+        if (headless) {
+            options.addArguments("-headless");
+        }
+        return new FirefoxDriver(options);
     }
 
     public static WebDriver getDriver() {
@@ -40,4 +68,5 @@ public final class DriverManager {
             DRIVER.remove();
         }
     }
+
 }

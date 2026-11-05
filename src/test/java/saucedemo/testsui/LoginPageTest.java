@@ -14,11 +14,9 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "This is test for SuccessfulLogin Path with correct username and password")
     public void testSuccessfulLogin() {
 
-        // Create Login Page
-        LoginPage loginPage = new LoginPage(getDriver());
+        // Creating, Opening and Storing Best practice below the old one
+        LoginPage loginPage = initializePage(LoginPage.class).open();
 
-        // Open SauceDemo
-        loginPage.open();
 
         // Login with valid credentials
         InventoryPage inventoryPage = loginPage.loginWithValidCredentials("standard_user", "secret_sauce");
@@ -47,10 +45,9 @@ public class LoginPageTest extends BaseTest {
 
         SoftAssert softAssert = new SoftAssert();
 
-        // Create Login Page
+        // Old one, object creation first then on that object using method.
         LoginPage loginPage = new LoginPage(getDriver());
 
-        // Open SauceDemo
         loginPage.open();
 
         // Login with Invalid credentials
@@ -76,11 +73,8 @@ public class LoginPageTest extends BaseTest {
 
         System.out.println(Thread.currentThread().getName() + " -> " + ((RemoteWebDriver) getDriver()).getSessionId());
 
-        // Create Login Page
-        LoginPage loginPage = new LoginPage(getDriver());
-
-        // Open SauceDemo
-        loginPage.open();
+        // Creating, Opening and Storing Best practice
+        LoginPage loginPage = initializePage(LoginPage.class).open();
 
         // Login with valid credentials
         InventoryPage inventoryPage = loginPage.loginWithValidCredentials("standard_user", "secret_sauce");
@@ -100,8 +94,9 @@ public class LoginPageTest extends BaseTest {
 
     @Test(description = "Failed login followed by successful login in the same session")
     public void testFailedThenSuccessfulLogin() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.open();
+
+        // Creating, Opening and Storing Best practice
+        LoginPage loginPage = initializePage(LoginPage.class).open();
 
         loginPage.loginWithInvalidCredentials("Greetings_Neo o_^ ", "WAKE_UP_NEO");
         InventoryPage inventoryPage = loginPage.loginWithValidCredentials("standard_user", "secret_sauce");

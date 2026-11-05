@@ -1,15 +1,16 @@
 package saucedemo.pages;
 
+import basepage.BasePage;
+import config.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import basepage.BasePage;
 
 public class LoginPage extends BasePage {
 
     // Page-URL
 
-    private static final String PAGE_URL = "https://www.saucedemo.com";
+    private static final String PAGE_URL = Configuration.getRequired("base_url");
 
     // Locators
     private final By usernameField = By.id("user-name");
@@ -22,10 +23,29 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    // Open site (SauceDemo)
-    public void open() {
+    /*
+     * Opens the page and returns it, so calls can be chained.
+     *
+     * With a void method, the page object is created first and used on the next line:
+     *
+     *     LoginPage loginPage = initPage(LoginPage.class);
+     *     loginPage.open();
+     *
+     * Because this method returns "this" (the same page object), creating, opening
+     * and storing the page can happen in one line:
+     *
+     *     LoginPage loginPage = initPage(LoginPage.class).open();
+     *
+     * No new object is created. open() hands back the page it was called on,
+     * and the variable loginPage points to it.
+     *
+     * Both styles work. The one-line style is just shorter and easier to read.
+     */
+
+    public LoginPage open() {
         driver.get(PAGE_URL);
         waitUntilOpened();
+        return this;
     }
 
     // Hunters mark to know the page is open in this case login button - no login without login button
