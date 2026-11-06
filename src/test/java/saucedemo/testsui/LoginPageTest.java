@@ -1,6 +1,7 @@
 package saucedemo.testsui;
 
 import basetest.BaseTest;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -9,6 +10,7 @@ import org.testng.asserts.SoftAssert;
 import saucedemo.pages.InventoryPage;
 import saucedemo.pages.LoginPage;
 
+@Feature("Login")
 public class LoginPageTest extends BaseTest {
 
     @Test(description = "This is test for SuccessfulLogin Path with correct username and password")
@@ -16,7 +18,6 @@ public class LoginPageTest extends BaseTest {
 
         // Creating, Opening and Storing Best practice below the old one
         LoginPage loginPage = initializePage(LoginPage.class).open();
-
 
         // Login with valid credentials
         InventoryPage inventoryPage = loginPage.loginWithValidCredentials("standard_user", "secret_sauce");

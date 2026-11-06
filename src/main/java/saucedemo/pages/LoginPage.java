@@ -2,6 +2,7 @@ package saucedemo.pages;
 
 import basepage.BasePage;
 import config.Configuration;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,7 +42,7 @@ public class LoginPage extends BasePage {
      *
      * Both styles work. The one-line style is just shorter and easier to read.
      */
-
+    @Step("Open login page")
     public LoginPage open() {
         driver.get(PAGE_URL);
         waitUntilOpened();
@@ -54,6 +55,7 @@ public class LoginPage extends BasePage {
         return loginButton;
     }
 
+    @Step("Log in with valid credentials as '{0}'")
     // Successful login path
     public InventoryPage loginWithValidCredentials(String username, String password) {
         submitLoginForm(username, password);
@@ -63,6 +65,7 @@ public class LoginPage extends BasePage {
         return inventoryPage;
     }
 
+    @Step("Log in with invalid credentials as '{0}'")
     // Unsuccessful login path
     public LoginPage loginWithInvalidCredentials(String username, String password) {
         submitLoginForm(username, password);
@@ -76,6 +79,7 @@ public class LoginPage extends BasePage {
         click(loginButton);
     }
 
+    @Step("Read login error message")
     // Gets error text after invalid login / password
     public String getErrorText() {
         return getText(errorText);

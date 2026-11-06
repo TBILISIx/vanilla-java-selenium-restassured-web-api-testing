@@ -1,6 +1,5 @@
 package basepage;
 
-
 import org.openqa.selenium.WebDriver;
 
 
@@ -47,4 +46,5 @@ public final class PageObjectFactory {
                     pageClass.getSimpleName() + " must have a public constructor with one WebDriver parameter", e);
         }
     }
+
 }

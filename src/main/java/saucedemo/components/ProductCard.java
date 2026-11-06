@@ -1,5 +1,7 @@
 package saucedemo.components;
 
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -62,6 +64,7 @@ public class ProductCard {
         return root.findElement(nameLocator).getText();
     }
 
+    @Step("Add product to cart")
     public void addToCart() {
         root.findElement(addButton).click();
     }

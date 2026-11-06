@@ -1,11 +1,13 @@
 package saucedemo.testsui;
 
 import basetest.BaseTest;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import saucedemo.pages.InventoryPage;
 import saucedemo.pages.LoginPage;
 
+@Feature("Cart")
 public class CartTest extends BaseTest {
 
     @Test(description = "Add a product to the cart")

@@ -1,10 +1,11 @@
 package saucedemo.pages;
 
+import basepage.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import basepage.BasePage;
 import saucedemo.components.ProductCard;
 import saucedemo.components.SideMenu;
 
@@ -31,6 +32,7 @@ public class InventoryPage extends BasePage {
         return By.xpath("//*[@class='inventory_list']");
     }
 
+    @Step("Find product '{0}' on inventory page")
     // Method to get product with exact name
     public ProductCard getProduct(String name) {
         return driverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productCards))
@@ -43,10 +45,12 @@ public class InventoryPage extends BasePage {
                 .orElseThrow(() -> new NoSuchElementException("Product not found: " + name));
     }
 
+    @Step("Read cart badge count")
     public int getCartCount() {
         return Integer.parseInt(getText(cartBadge));
     }
 
+    @Step("Log out via side menu")
     // Log Out Method
     public LoginPage logOut() {
         sideMenu.open();

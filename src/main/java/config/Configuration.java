@@ -41,4 +41,5 @@ public final class Configuration {
         }
         return properties;
     }
+
 }

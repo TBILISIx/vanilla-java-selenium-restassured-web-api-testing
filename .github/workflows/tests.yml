@@ -32,4 +32,5 @@ jobs:
           path: |
             target/surefire-reports
             target/screenshots
+            target/allure-results
           if-no-files-found: ignore
